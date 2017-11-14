@@ -2,13 +2,17 @@
 
 import { combineReducers } from 'redux';
 
-// import loader, * as fromLoader from './loading';
+import loader, * as fromLoader from './loader';
 
 const reducers = combineReducers({
-    default: () => ''
-})
+    loader
+});
 
 export default reducers;
+
+export const getLoader = state =>
+    fromLoader.getLoader(state.loader)
+;
 
 // export const getFormValue = (state, key) =>
 //     fromForm.getValue(state.form, key);

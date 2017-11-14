@@ -7,7 +7,7 @@ import configPublic from '../public.config';
 
 import Container from './Container';
 
-import Loader from './Loader/Loader';
+import LoaderVisible from './Loader/LoaderVisible';
 
 import {
     Button,
@@ -20,7 +20,7 @@ import {
 } from 'semantic-ui-react'
 
 const Root = () => ([
-    <Loader key="mainloader"/>,
+    <LoaderVisible key="mainloader"/>,
     <Container key="maincontainer" />
 ]);
 
