@@ -81,6 +81,114 @@ app.use(bodyParser.json());
 
 app.use(express.static(configWebpack.web));
 
+
+// example api vvv
+    import uuid4 from 'uuid/v4';
+    import isArray from 'lodash/isArray';
+
+    const createStorage = function (file) {
+        const tool = {
+            read() {
+                let data = {};
+
+                if (fs.existsSync(file)) {
+
+                    data = JSON.parse(fs.readFileSync(file) || {});
+                }
+
+                return data;
+            },
+            write(data) {
+                fs.writeFileSync(file, JSON.stringify(data, null, '    '));
+                return tool
+            }
+        }
+        return tool;
+    };
+    const storate = createStorage(
+        path.resolve(__dirname, 'storage.json')
+    );
+
+    const json = (res, data) => {
+        res.set('Content-type', 'application/json; charset=utf-8');
+        res.send(JSON.stringify(data));
+    }
+
+    app.get('/api/list', (req, res) => json(res, storate.read()));
+
+    app.post('/api/add', (req, res) => {
+
+        // fetch('/api/add', {
+        //     method: 'post',
+        //     headers: {
+        //         'Content-type': 'application/json; charset=utf-8'
+        //     },
+        //     body: JSON.stringify({
+        //         name: 'example'
+        //     }, null, '    ')
+        // })
+
+        if ( ! req.body.name ) {
+
+            return json(res, {
+                error: 'no name specified'
+            })
+        }
+
+        const data = storate.read();
+
+        if ( ! data.list ) {
+
+            data.list = [];
+        }
+
+        const item = {
+            id: uuid4(),
+            name: req.body.name
+        }
+
+        data.list.push(item);
+
+        storate.write(data);
+
+        return json(res, {
+            item
+        });
+    });
+    app.post('/api/remove', (req, res) => {
+
+        // fetch('/api/remove', {
+        //     method: 'post',
+        //     headers: {
+        //         'Content-type': 'application/json; charset=utf-8'
+        //     },
+        //     body: JSON.stringify({
+        //         id: '60165658-c22f-4437-ad55-d9f3575319a5'
+        //     }, null, '    ')
+        // })
+
+        const data = storate.read();
+
+        if ( ! req.body.id ) {
+
+            return json(res, {
+                error: 'no id specified'
+            })
+        }
+
+        if ( isArray(data.list) ) {
+
+            data.list = data.list.filter(item => item.id !== req.body.id);
+
+            storate.write(data);
+        }
+
+        json(res, {
+            ok: true
+        });
+    });
+// example api ^^^
+
 // login & check token
 
 const headerName = `Authorization`;
