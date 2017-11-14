@@ -16,15 +16,27 @@ import {
 
 import { fetchJson } from "../transport";
 
-import uuid4 from 'uuid/v4';
+export const onAdd = name => (dispatch, getState) => {
 
-export const onAdd = value => ({
-    type: LIST_ADD,
-    payload: {
-        id: uuid4(),
-        name: value
-    }
-});
+    dispatch(loaderOn());
+
+    return fetchJson('/api/add', {
+        method: 'post',
+        body: {
+            name
+        }
+    })
+        .then(json => {
+
+            dispatch({
+                type: LIST_ADD,
+                payload: json.item
+            });
+
+            dispatch(loaderOff());
+        })
+    ;
+};
 
 export const onRemove = id => ({
     type: LIST_REMOVE,
