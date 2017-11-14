@@ -30,20 +30,34 @@ export default class List extends Component {
     onChange = e => this.setState({input:e.target.value})
     render() {
 
-        const { list, onDelete } = this.props;
+        const { list, onDelete, loading } = this.props;
 
         return (
             <div>
                 <h4>List:</h4>
-                <form onSubmit={this.onSubmit}>
-                    <input type="text" onChange={this.onChange} value={this.state.input}/>
-                    <button type="submit">add</button>
+                <form
+                    onSubmit={this.onSubmit}
+                    disabled={loading}
+                >
+                    <input
+                        type="text"
+                        onChange={this.onChange}
+                        value={this.state.input}
+                        disabled={loading}
+                    />
+                    <button
+                        type="submit"
+                        disabled={loading}
+                    >add</button>
                 </form>
                 <ul>
                     {list.map(item =>
                         <li key={item.id}>
                             {item.name}
-                            <button onClick={() => onDelete(item.id)}>remove</button>
+                            <button
+                                onClick={() => onDelete(item.id)}
+                                disabled={loading}
+                            >remove</button>
                         </li>
                     )}
                 </ul>

@@ -6,7 +6,8 @@ import React, { Component } from 'react';
 import List from './List';
 
 import {
-    getList
+    getList,
+    getLoader
 } from '../../reducers';
 
 import {
@@ -30,7 +31,8 @@ class ListVisible extends Component {
 }
 
 const mapStateToProps = state => ({
-    list: getList(state)
+    list: getList(state),
+    loading: getLoader(state)
 });
 
 const mapDispatchToProps = {
