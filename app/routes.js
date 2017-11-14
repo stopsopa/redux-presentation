@@ -1,27 +1,21 @@
 
-// import MainListVisible from './components/MainListVisible';
+import ListVisible from './components/List/ListVisible';
+
+import { Route, Switch, Redirect, withRouter, Link } from 'react-router-dom';
+
+import React from 'react';
 
 const routes = [
-    // {
-    //     path: "/gui",
-    //     component: MainListVisible,
-    //     exact: true
-    // },
-    // {
-    //     path: "/gui/list",
-    //     component: List,
-    //     exact: true
-    // },
-    // {
-    //     path: "/gui/edit/:id",
-    //     component: Edit,
-    //     exact: true
-    // },
-    // {
-    //     path: "/gui/create",
-    //     component: Edit,
-    //     exact: true
-    // }
+    {
+        path: "/list",
+        component: ListVisible,
+        exact: true
+    },
+    {
+        path: '/test',
+        component: () => (<Link to="/list">go back ...</Link>),
+        exact: true
+    }
 ];
 
 export default routes;
