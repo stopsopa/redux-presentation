@@ -38,10 +38,29 @@ export const onAdd = name => (dispatch, getState) => {
     ;
 };
 
-export const onRemove = id => ({
-    type: LIST_REMOVE,
-    payload: id
-});
+export const onRemove = id => (dispatch, getState) => {
+
+    const state = getState();
+
+    dispatch(loaderOn());
+
+    return fetchJson('/api/remove', {
+        method: 'post',
+        body: {
+            id
+        }
+    })
+        .then(json => {
+
+            dispatch({
+                type: LIST_REMOVE,
+                payload: id
+            });
+
+            dispatch(loaderOff());
+        })
+    ;
+};
 
 export const listLoad = () => (dispatch, getState) => {
 
