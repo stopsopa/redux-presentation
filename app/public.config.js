@@ -13,7 +13,7 @@
 module.exports = {
     pingserver: 'localhost:80',
     fake: false,
-    delay: 1300, //1300
+    delay: 300, //1300
     jwt: {
         secureEndpointsPattern: /^\/admin/,
         loginUrl: '/login',

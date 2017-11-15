@@ -43,7 +43,6 @@ export default class List extends Component {
                         type="text"
                         onChange={this.onChange}
                         value={this.state.input}
-                        disabled={loading}
                     />
                     <button
                         type="submit"
