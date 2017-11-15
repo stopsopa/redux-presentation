@@ -11,7 +11,7 @@
  */
 
 module.exports = {
-    pingserver: 'localhost:80',
+    pingserver: 'localhost:8080',
     fake: false,
     delay: 300, //1300
     jwt: {
