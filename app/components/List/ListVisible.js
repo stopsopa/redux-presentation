@@ -17,11 +17,17 @@ import {
 } from '../../actions';
 
 class ListVisible extends Component {
+    static fetchData = (store, routerParams) => {
+        return store.dispatch(listLoad());
+    }
+    getData = () => this.props.listLoad()
     componentDidMount() {
 
-        const { listLoad } = this.props;
+        const { list, history } = this.props;
 
-        listLoad();
+        (list && list.length) || this.getData();
+
+        (history && history.action === 'PUSH') && this.getData();
     }
     render() {
         return (
