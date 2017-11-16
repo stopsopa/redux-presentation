@@ -13,21 +13,21 @@ import {
 import {
     onAdd,
     onRemove,
-    listLoad
+    listLoad,
+    fetchFooter
 } from '../../actions';
 
 class ListVisible extends Component {
-    static fetchData = (store, routerParams) => {
-        return store.dispatch(listLoad());
-    }
+    static fetchData = (store, routerParams) => Promise.all([
+        store.dispatch(listLoad()),
+        store.dispatch(fetchFooter())
+    ])
     getData = () => this.props.listLoad()
     componentDidMount() {
 
-        const { list, history } = this.props;
+        const { list, history: { action } } = this.props;
 
-        (list && list.length) || this.getData();
-
-        (history && history.action === 'PUSH') && this.getData();
+        ( ! list || ! list.length || action === 'PUSH' ) && this.getData('first');
     }
     render() {
         return (

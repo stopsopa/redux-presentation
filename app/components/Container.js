@@ -5,6 +5,8 @@ import { Route, Switch, Redirect, withRouter, Link } from 'react-router-dom';
 
 import routes from '../routes';
 
+import FooterVisible from './FooterVisible';
+
 export default () => (
     <div>
         <Switch>
@@ -16,7 +18,8 @@ export default () => (
                 )
             }/>
         </Switch>
+        <Link to="/test" style={{float:'right'}}>go to test...</Link>
         <hr/>
-        <Link to="/test">go to test...</Link>
+        <FooterVisible />
     </div>
 );

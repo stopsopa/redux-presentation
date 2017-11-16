@@ -6,9 +6,12 @@ import loader, * as fromLoader from './loader';
 
 import list, * as fromList from './list';
 
+import footer, * as fromFooter from './footer';
+
 const reducers = combineReducers({
     loader,
-    list
+    list,
+    footer
 });
 
 export default reducers;
@@ -21,11 +24,6 @@ export const getList = state =>
     fromList.getList(state.list)
 ;
 
-// export const getFormValue = (state, key) =>
-//     fromForm.getValue(state.form, key);
-//
-// export const getFormData = state => ({
-//     laststatus  : getFormValue(state, 'laststatus'),
-//     interval    : getFormValue(state, 'interval'),
-//     url         : getFormValue(state, 'url'),
-// });
+export const getFooter = state =>
+    fromFooter.getFooter(state.footer)
+;
