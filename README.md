@@ -1,3 +1,7 @@
+# DEPRECATED
+Created in 2017 - quite old now and not maintained.
+
+What? Nothing to be ashamed here. Redux back then was HOT - we all do mistakes... leave me alone.
 
 Redux presentation
 ====
